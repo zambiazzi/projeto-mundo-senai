@@ -1,9 +1,12 @@
 import pygame
 
 pygame.init()
+pygame.font.init()
 
 SCREEN_WIDTH = 1920
 SCREEN_HIGHT = 1000
+
+font = pygame.font.Font('Mitr-Bold.ttf', 74)
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HIGHT))
 pygame.display.set_caption('Jogo da Velha')
@@ -21,12 +24,37 @@ def drawX(coordinate1, coordinate2, coordinate3, coordinate4):
   pygame.draw.line(screen, (58, 163, 148), coordinate1, coordinate2, 25)
   pygame.draw.line(screen, (58, 163, 148), coordinate3, coordinate4, 25)
 
+def write(phrase, coordinate):
+  text = font.render(phrase, True, (255, 255, 255))
+  text_rect = text.get_rect(center=(coordinate))
+  return screen.blit(text, text_rect)
+
+def startGame():
+  game_running = True
+  while game_running:
+      
+      for event in pygame.event.get():
+          if event.type == pygame.QUIT:
+              return False
+          elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+              game_started = startGame()
+
+      screen.fill((110, 92, 98))
+      drawHash()
+      write('Vez de X', (327, 540))
+      pygame.display.flip()
+
+  return True
+
+
 run = True
 while run:
 
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
       run = False
+    elif event.type == pygame.MOUSEBUTTONDOWN:
+      startGame()
   
   pygame.time.wait(500)
   screen.fill((110, 92, 98))
@@ -40,7 +68,8 @@ while run:
   drawX((888, 465), (1037, 615), (886, 615), (1035, 465))
   drawX((831, 819), (680, 668), (680, 819), (831, 668))
   drawX((1087, 668), (1237, 819), (1085, 819), (1235, 668))
-
+  write('Toque em qualquer lugar para jogar!', (960, 972))
+  
   pygame.display.flip()
   pygame.time.wait(500)
 
@@ -55,6 +84,8 @@ while run:
   drawX((682, 465), (831, 615), (680, 615), (829, 465))
   drawX((1088, 465), (1237, 615), (1085, 615), (1234, 465))
   drawX((886, 668), (1037, 819), (886, 819), (1037, 668))
+  write('Toque em qualquer lugar para jogar!', (960, 972))
+  
 
   pygame.display.flip()
 
