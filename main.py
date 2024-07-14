@@ -36,6 +36,10 @@ def get_clicked_cell(mouse_pos):
     col = (x - 660) // 200  # calcula a coluna baseado na posição do clique
     return (row, col)
 
+def is_click_inside_board(mouse_pos):
+    x, y = mouse_pos
+    return 660 <= x <= 1260 and 241 <= y <= 839
+
 def check_winner(board):
     # função que verifica se algum jogador já ganhou
     for row in board:
@@ -62,12 +66,13 @@ def start_game():
                 pygame.quit()
                 sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                row, col = get_clicked_cell(event.pos)
-                if board[row][col] == '':
-                    board[row][col] = current_player
-                    if check_winner(board):
-                        return current_player
-                    current_player = 'O' if current_player == 'X' else 'X'
+                if is_click_inside_board(event.pos):
+                    row, col = get_clicked_cell(event.pos)
+                    if board[row][col] == '':
+                        board[row][col] = current_player
+                        if check_winner(board):
+                            return current_player
+                        current_player = 'O' if current_player == 'X' else 'X'
 
         screen.fill((110, 92, 98))
         draw_hash()
