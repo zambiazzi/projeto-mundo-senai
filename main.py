@@ -14,7 +14,7 @@ BOARD_START_Y = 241
 font = pygame.font.Font('Mitr-Bold.ttf', 74)
 small_font = pygame.font.Font('Mitr-Bold.ttf', 50)
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption('Jogo da Velha')
+pygame.display.set_caption('Jogo da Velha Infinito')
 
 def draw_hash():
     lines = [
