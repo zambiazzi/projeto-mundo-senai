@@ -5,30 +5,30 @@ import time
 pygame.init()
 pygame.font.init()
 
-SCREEN_WIDTH = 1900
-SCREEN_HEIGHT = 1080
+SCREEN_WIDTH = 1024
+SCREEN_HEIGHT = 600
 CELL_SIZE = 200
 BOARD_START_X = 660
 BOARD_START_Y = 241
 
-font = pygame.font.Font('Mitr-Bold.ttf', 74)
+font = pygame.font.Font('Mitr-Bold.ttf', 40)
 small_font = pygame.font.Font('Mitr-Bold.ttf', 50)
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption('Jogo da Velha Infinito')
 
 def draw_hash():
     lines = [
-        ((859, 241), (859, 839)),
-        ((1059, 241), (1059, 839)),
-        ((660, 440), (1260, 440)),
-        ((660, 641), (1260, 641)),
+        ((447, 108), (447, 492)),
+        ((576, 108), (576, 492)),
+        ((320, 236), (704, 236)),
+        ((320, 364), (704, 364)),
     ]
     for line in lines:
         pygame.draw.line(screen, (97, 84, 88), line[0], line[1], 9)
 
 def draw_circle(coord, highlight=False):
     color = (161, 133, 102) if highlight else (211, 173, 105)
-    pygame.draw.circle(screen, color, coord, 75, 15)
+    pygame.draw.circle(screen, color, coord, 50, 15)
 
 def draw_x(coord1, coord2, coord3, coord4, highlight=False):
     color = (84, 128, 123) if highlight else (58, 163, 148)
@@ -90,24 +90,28 @@ def start_game():
             for col in range(3):
                 if board[row][col] == 'X':
                     highlight = (row, col) == moves['X'][0] if len(moves['X']) == 3 and current_player == 'X' else False
-                    draw_x((BOARD_START_X + col * CELL_SIZE + 30, BOARD_START_Y + row * CELL_SIZE + 30),
-                           (BOARD_START_X + col * CELL_SIZE + 170, BOARD_START_Y + row * CELL_SIZE + 170),
-                           (BOARD_START_X + col * CELL_SIZE + 170, BOARD_START_Y + row * CELL_SIZE + 30),
-                           (BOARD_START_X + col * CELL_SIZE + 30, BOARD_START_Y + row * CELL_SIZE + 170),
-                           highlight)
+                    draw_x(
+                        (BOARD_START_X + col * CELL_SIZE + 30, BOARD_START_Y + row * CELL_SIZE + 30),
+                        (BOARD_START_X + col * CELL_SIZE + 170, BOARD_START_Y + row * CELL_SIZE + 170),
+                        (BOARD_START_X + col * CELL_SIZE + 170, BOARD_START_Y + row * CELL_SIZE + 30),
+                        (BOARD_START_X + col * CELL_SIZE + 30, BOARD_START_Y + row * CELL_SIZE + 170),
+                        highlight
+                    )
                 elif board[row][col] == 'O':
                     highlight = (row, col) == moves['O'][0] if len(moves['O']) == 3 and current_player == 'O' else False
-                    draw_circle((BOARD_START_X + col * CELL_SIZE + 100, BOARD_START_Y + row * CELL_SIZE + 100),
-                                highlight)
+                    draw_circle((BOARD_START_X + col * CELL_SIZE + 100, BOARD_START_Y + row * CELL_SIZE + 100), highlight)
+
 
         if current_player == 'X':
-            write('Vez de ', (327, 540), (255, 255, 255))
-            write('X', (327 + 160, 540), (58, 163, 148))
+            write('Vez de ', (150, 300), (255, 255, 255))
+            write('X', (150 + 85, 300), (58, 163, 148))
         else:
-            write('Vez de ', (1615, 540), (255, 255, 255))
-            write('O', (1615 + 160, 540), (211, 173, 105))
+            write('Vez de ', (875, 300), (255, 255, 255))
+            write('O', (875 + 85, 300), (211, 173, 105))
         
         pygame.display.flip()
+
+
 
 def winner_screen(winner, game_duration):
     screen.fill((110, 92, 98))
@@ -127,7 +131,7 @@ def winner_screen(winner, game_duration):
             
         minutes = int(game_duration) // 60
         seconds = int(game_duration) % 60
-        time_text = f'Tempo de jogo: {minutes}:{seconds:02d}'
+        time_text = f'Duração do jogo: {minutes}:{seconds:02d}'
 
         write(time_text, (960, 640), (255, 255, 255), small_font)
         pygame.display.flip()
@@ -145,16 +149,16 @@ def main():
 
         screen.fill((110, 92, 98))
         draw_hash()
-        draw_circle((960, 335))
-        draw_circle((753, 540))
-        draw_circle((1164, 540))
-        draw_circle((960, 742))
-        draw_x((682, 262), (831, 412), (680, 412), (830, 262))
-        draw_x((1088, 262), (1237, 412), (1085, 412), (1235, 262))
-        draw_x((888, 465), (1037, 615), (886, 615), (1035, 465))
-        draw_x((831, 819), (680, 668), (680, 819), (831, 668))
-        draw_x((1087, 668), (1237, 819), (1085, 819), (1235, 668))
-        write('Toque em qualquer lugar para jogar!', (960, 972), (255, 255, 255))
+        draw_circle((512, 169))
+        draw_circle((381, 300))
+        draw_circle((641, 300))
+        draw_circle((512, 429))
+        draw_x((340, 128), (422, 210), (422, 128), (340, 210))
+        draw_x((600, 128), (682, 210), (682, 128), (600, 210))
+        draw_x((471, 258), (553, 341), (553, 258), (471, 341))
+        draw_x((340, 388), (422, 470), (422, 388), (340, 470))
+        draw_x((600, 388), (682, 470), (682, 388), (600, 470))
+        write('Toque em qualquer lugar para jogar!', (512, 540), (255, 255, 255))
 
         pygame.display.flip()
         pygame.time.Clock().tick(60)  
