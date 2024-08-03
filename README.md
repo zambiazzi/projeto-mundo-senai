@@ -24,5 +24,6 @@ Por fim, execute o código em alguma IDE, de preferência no [Visual Studio Code
 O jogo funciona da mesma forma que o jogo da velha clássico, suas diferenças são:
 - Não tem empate
 - Só podem ter 3 símbolos no tabuleiro (X e O) para cada jogador <br>
+
 Quando são completas as 3 jogadas, a última jogada que o jogador realizou muda de posição para onde uma nova for feita.
 
