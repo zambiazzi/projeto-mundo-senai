@@ -14,9 +14,9 @@ Windows: <br>
 <code>pip install pygame</code>
 
 Linux: <br>
-<code> sudo apt update <br>
-sudo apt install python3 python3-pip <br>
-pip3 install pygame </code>
+<code> sudo apt update </code><br>
+<code> sudo apt install python3 python3-pip </code><br>
+<code> pip3 install pygame </code><br>
 
 Por fim, execute o código em alguma IDE, de preferência no [Visual Studio Code](https://code.visualstudio.com/).
 
