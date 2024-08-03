@@ -7,7 +7,7 @@ O jogo será implementado no Raspberry PI 3B+ com um display touch screen no nos
 
 ### Como utilizá-lo
 
-Baixe o arquivo main.py e a versão mais recente do [python 3.0](https://www.python.org/downloads/).<br>
+Baixe os arquivos do projeto e a versão mais recente do [python 3.0](https://www.python.org/downloads/).<br>
 Após isso, execute o seguinte comando no terminal:
 
 Windows: <br>
