@@ -10,10 +10,10 @@ O jogo será implementado no Raspberry PI 3B+ com um display touch screen.
 Baixe o arquivo main.py e a versão mais recente do [python 3.0](https://www.python.org/downloads/).<br>
 Após isso, execute o seguinte comando no terminal:
 
-Windows:
+Windows: <br>
 <code>pip install pygame</code>
 
-Linux:
+Linux: <br>
 <code> sudo apt update <br>
 sudo apt install python3 python3-pip <br>
 pip3 install pygame </code>
