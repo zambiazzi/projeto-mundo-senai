@@ -4,6 +4,7 @@ import time
 
 pygame.init()
 pygame.font.init()
+pygame.mixer.init()
 
 SCREEN_WIDTH = 1900
 SCREEN_HEIGHT = 1080
@@ -15,6 +16,8 @@ font = pygame.font.Font('Mitr-Bold.ttf', 74)
 small_font = pygame.font.Font('Mitr-Bold.ttf', 50)
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption('Jogo da Velha Infinito')
+move_sound = pygame.mixer.Sound('play_sound.mp3')
+win_sound = pygame.mixer.Sound('winning_sound.mp3')
 
 def draw_hash():
     lines = [
@@ -71,6 +74,8 @@ def start_game():
                 if cell:
                     row, col = cell
                     if board[row][col] == '':
+                        move_sound.play()
+                        
                         if len(moves[current_player]) < 3:
                             moves[current_player].append((row, col))
                         else:
@@ -79,6 +84,7 @@ def start_game():
                             moves[current_player].append((row, col))
                         board[row][col] = current_player
                         if check_winner(board):
+                            win_sound.play()
                             end_time = time.time()
                             return current_player, end_time - start_time
                         current_player = 'O' if current_player == 'X' else 'X'
