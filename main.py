@@ -6,19 +6,23 @@ pygame.init()
 pygame.font.init()
 pygame.mixer.init()
 
+# definindo tamanhos
 SCREEN_WIDTH = 1900
 SCREEN_HEIGHT = 1080
 CELL_SIZE = 200
 BOARD_START_X = 660
 BOARD_START_Y = 241
 
+# configurações padrões
 font = pygame.font.Font('Mitr-Bold.ttf', 74)
 small_font = pygame.font.Font('Mitr-Bold.ttf', 50)
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption('Jogo da Velha Infinito')
+pygame.mouse.set_visible(False)
 move_sound = pygame.mixer.Sound('play_sound.mp3')
 win_sound = pygame.mixer.Sound('winning_sound.mp3')
 
+# desenhar Serquilha
 def draw_hash():
     lines = [
         ((859, 241), (859, 839)),
@@ -29,26 +33,31 @@ def draw_hash():
     for line in lines:
         pygame.draw.line(screen, (97, 84, 88), line[0], line[1], 9)
 
+# desenhar O
 def draw_circle(coord, highlight=False):
     color = (161, 133, 102) if highlight else (211, 173, 105)
     pygame.draw.circle(screen, color, coord, 75, 15)
 
+# desenhar X
 def draw_x(coord1, coord2, coord3, coord4, highlight=False):
     color = (84, 128, 123) if highlight else (58, 163, 148)
     pygame.draw.line(screen, color, coord1, coord2, 25)
     pygame.draw.line(screen, color, coord3, coord4, 25)
 
+# escrever na tela
 def write(phrase, coord, color, font=font):
     text = font.render(phrase, True, color)
     text_rect = text.get_rect(center=coord)
     screen.blit(text, text_rect)
 
+# função que retorna as coordenadas da célula clicada
 def get_clicked_cell(mouse_pos):
     x, y = mouse_pos
     if BOARD_START_X <= x <= BOARD_START_X + 3 * CELL_SIZE and BOARD_START_Y <= y <= BOARD_START_Y + 3 * CELL_SIZE:
         return (y - BOARD_START_Y) // CELL_SIZE, (x - BOARD_START_X) // CELL_SIZE
     return None
 
+# função para verificar se algum jogador já ganhou
 def check_winner(board):
     for i in range(3):
         if board[i][0] == board[i][1] == board[i][2] != '' or board[0][i] == board[1][i] == board[2][i] != '':
@@ -57,6 +66,7 @@ def check_winner(board):
         return True
     return False
 
+# lógica geral do jogo
 def start_game():
     board = [[''] * 3 for _ in range(3)]
     moves = {'X': [], 'O': []}
@@ -115,6 +125,7 @@ def start_game():
         
         pygame.display.flip()
 
+# tela do vencedor
 def winner_screen(winner, game_duration):
     screen.fill((110, 92, 98))
     running = True
@@ -127,9 +138,11 @@ def winner_screen(winner, game_duration):
                 return 
 
         if winner == 'X':
-            write('X venceu!', (960, 440), (58, 163, 148))
+            write('X ', (840, 440), (58, 163, 148))
+            write('venceu!', (840 + 180, 440), (255, 255, 255))
         else:
-            write('O venceu!', (960, 440), (211, 173, 105))
+            write('O ', (840, 440), (211, 173, 105))
+            write('venceu!', (840 + 180, 440), (255, 255, 255))
             
         minutes = int(game_duration) // 60
         seconds = int(game_duration) % 60
@@ -138,6 +151,7 @@ def winner_screen(winner, game_duration):
         write(time_text, (960, 640), (255, 255, 255), small_font)
         pygame.display.flip()
 
+# loop principal
 def main():
     running = True
     while running:
