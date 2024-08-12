@@ -27,3 +27,5 @@ O jogo funciona da mesma forma que o jogo da velha clássico, suas diferenças s
 
 Quando são completas as 3 jogadas, a última jogada que o jogador realizou muda de posição para onde uma nova for feita.
 
+Projeto campeão do Mundo SENAI - 2024 da categoria Curso Técnico - Projeto Inovador 🥇
+
