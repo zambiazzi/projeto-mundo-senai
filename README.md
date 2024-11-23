@@ -2,8 +2,8 @@
 
 ### Resumo do projeto
 
-Este projeto consiste em um jogo da velha com algumas regras diferentes, ele é desenvolvido em python utilizando a biblioteca pygame.
-O jogo será implementado no Raspberry PI 3B+ com um display touch screen no nosso projeto original.
+Este projeto consiste em um jogo da velha desenvolvido em python com a biblioteca pygame.
+O jogo foi implementado no Raspberry PI 3B+ com um display touch screen no nosso projeto original.
 
 ### Como utilizá-lo
 
